@@ -1,0 +1,26 @@
+{
+  "name": "API Konsölkå",
+  "manifest_version": 2,
+  "description": "Add-on for providing Sendsay API console interface on the fingertips",
+  "version": "0.0.0.1",
+  "browser_action": {
+    "default_title": "Sendsay API Console",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "icon48.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "cookies",
+    "*://*.sendsay.ru/"
+  ],
+  "options_page": "options.html",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "ac7818295de35a0e9bc5fba5c02b65e50a091968@temporary-addon",
+      "strict_min_version": "42.0"
+    }
+  }
+}

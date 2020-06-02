@@ -1,0 +1,15 @@
+.Logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  color: var(--color-rose);
+  transform-origin: center center;
+  cursor: help;
+  transition: color ease 0.6s, transform ease 0.6s;
+}
+
+.Logo.isDev {
+  color: var(--color-border);
+  transform: scaleX(-1);
+}

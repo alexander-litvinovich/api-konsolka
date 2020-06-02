@@ -1,0 +1,28 @@
+.isPopup.AuthForm {
+  width: 380px;
+}
+
+.AuthForm-loginPassword,
+.AuthForm-apiKey {
+  padding: 15px 20px 20px;
+  background-color: var(--color-paperwhite);
+  border-radius: 5px;
+}
+
+.isPage.AuthForm {
+  width: 400px;
+  background-color: var(--color-paperwhite);
+  border-radius: 5px;
+  padding: 10px 0px;
+  box-shadow: 0 10px 15px -5px var(--color-black-20);
+}
+
+.isPage .AuthForm-loginPassword,
+.isPage .AuthForm-apiKey {
+  padding: 20px 30px 20px;
+}
+
+.isPage.AuthForm-loginType {
+  margin-left: -10px;
+  margin-right: -10px;
+}

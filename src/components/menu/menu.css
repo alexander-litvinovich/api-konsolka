@@ -1,0 +1,29 @@
+.Menu-Item {
+  display: flex;
+  padding: 5px 10px;
+  color: var(--color-textPrimary);
+  font-size: 12px;
+  line-height: 20px;
+  text-decoration: none;
+  background-color: var(--color-paperwhite);
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.Menu-Separator {
+  height: 1px;
+  margin: 5px 0;
+  background-color: var(--color-border);
+}
+
+.Menu-Item:hover {
+  color: var(--color-paperwhite);
+  background-color: var(--color-blue);
+}
+
+.Menu {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+}

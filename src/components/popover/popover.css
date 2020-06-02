@@ -1,0 +1,22 @@
+.Popover {
+  z-index: 20;
+  display: none;
+  background: var(--color-paperwhite);
+  border-radius: 3px;
+  box-shadow: 0 5px 10px var(--color-border);
+}
+
+.Popover-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  display: none;
+}
+
+.Popover.isOpened,
+.Popover-overlay.isOpened {
+  display: block;
+}

@@ -1,0 +1,242 @@
+.QueryForm * {
+  box-sizing: border-box;
+}
+
+/* .QueryForm > .QueryForm-resizable {
+  box-shadow: 0 5px 20px var(--color-border);
+}
+
+.QueryForm {
+  margin-top: 50px;
+  margin-left: 50px;
+} */
+
+.QueryForm {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  box-sizing: border-box;
+  background: var(--color-underpaper);
+}
+
+.QueryForm-resizable {
+  /* border: 1px solid #000; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-paperwhite);
+}
+
+.QueryForm-userPanel {
+}
+
+.QueryForm-editor {
+  /* border: 1px solid #000; */
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.QueryForm-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 30px;
+  padding: 0 5px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.QueryForm-query {
+  padding-right: 5px;
+}
+
+.QueryForm-response {
+  position: relative;
+  padding-left: 5px;
+}
+
+.QueryForm-query,
+.QueryForm-response {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+
+.QueryForm-response {
+  flex-grow: 1;
+}
+
+.QueryForm-query > .QueryForm-label {
+  margin-right: -5px;
+}
+
+.QueryForm-response > .QueryForm-label {
+  justify-content: space-between;
+  margin-left: -5px;
+}
+
+.QueryForm-query.QueryForm-query--error {
+  animation: errorAnimation 1.5s ease-out; /* IE 10+, Fx 29+ */
+}
+
+.QueryForm-label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 30px;
+  padding: 0 5px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.QueryForm-extraInfo {
+  display: flex;
+  flex-direction: row;
+  margin: 0 10px;
+}
+
+.QueryForm-labelPanel {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.QueryForm-labelSpacer {
+  display: flex;
+  padding-right: 10px;
+  line-height: 15px;
+}
+
+.QueryForm-area {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.QueryForm-HandleBar {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  padding-top: 30px;
+  color: var(--color-border);
+}
+
+.QueryForm-HandleBar:hover,
+.QueryForm-HandleBar:active {
+  color: var(--color-border-hover);
+}
+
+.QueryForm-HandleBar > svg {
+  display: flex;
+}
+
+.QueryForm-actions {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 30px;
+  padding: 0 5px;
+  border-top: 1px solid var(--color-border);
+}
+
+.QueryForm-actions .u-space + .u-space {
+  margin-left: 20px;
+}
+
+.QueryForm-actionsRightCol {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.QueryForm-resizer {
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.QueryForm-HandleResizer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  color: var(--color-border);
+}
+
+.QueryForm-HandleResizer:hover,
+.QueryForm-HandleResizer:active {
+  color: var(--color-border-hover);
+}
+
+.QueryForm.is-popup .QueryForm-actions {
+  padding-left: 40px;
+}
+
+@keyframes errorAnimation {
+  0% {
+    --color-queryError: var(--color-textPrimary);
+  }
+
+  7% {
+    --color-queryError: var(--color-textPrimary);
+  }
+
+  14% {
+    --color-queryError: var(--color-red);
+  }
+
+  21% {
+    --color-queryError: var(--color-red);
+  }
+
+  28% {
+    --color-queryError: var(--color-textPrimary);
+  }
+
+  34% {
+    --color-queryError: var(--color-textPrimary);
+  }
+
+  41% {
+    --color-queryError: var(--color-red);
+  }
+
+  48% {
+    --color-queryError: var(--color-red);
+  }
+
+  55% {
+    --color-queryError: var(--color-textPrimary);
+  }
+
+  62% {
+    --color-queryError: var(--color-textPrimary);
+  }
+
+  69% {
+    --color-queryError: var(--color-red);
+  }
+
+  76% {
+    --color-queryError: var(--color-red);
+  }
+
+  83% {
+    --color-queryError: var(--color-textPrimary);
+  }
+
+  90% {
+    --color-queryError: var(--color-textPrimary);
+  }
+}

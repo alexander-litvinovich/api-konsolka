@@ -1,0 +1,30 @@
+.SessionHijack {
+  width: 380px;
+  background: var(--color-paperwhite);
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.SessionHijack-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.SessionHijack-continue {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.SessionHijack-loginInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,25 @@
+.A {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  color: var(--color-links);
+  font-size: inherit;
+  line-height: 20px;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.A:hover,
+.A.u-textColorInherit:hover {
+  color: var(--color-links-hover);
+}
+
+.A--colorSecondary {
+  color: var(--color-textSecondary);
+}
+
+.A--colorSecondary:hover {
+  color: var(--color-textPrimary);
+}

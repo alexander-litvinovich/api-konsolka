@@ -1,0 +1,43 @@
+.Preloader {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-paperwhite-20);
+  pointer-events: none;
+}
+
+.Preloader.isLoading .Preloader-pod {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.Preloader-pod {
+  padding: 20px;
+  color: var(--color-textGrey);
+  background: var(--color-underpaper);
+  border-radius: 10px;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.Preloader.isLoading .Preloader-animated {
+  transform-origin: center center;
+  animation: spinner 1.5s linear infinite; /* IE 10+, Fx 29+ */
+}

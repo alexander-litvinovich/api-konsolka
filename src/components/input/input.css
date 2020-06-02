@@ -1,0 +1,45 @@
+.Input-shape {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  padding: 5px;
+  background: var(--color-paperwhite);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+}
+
+.Input.isInput .Input-shape {
+  align-items: center;
+}
+
+.Input input,
+.Input textarea {
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
+  font-size: 14px;
+  line-height: 20px;
+  border: none;
+  outline: 0;
+}
+
+.Input.isValidationMessage .Input-shape {
+  border: 1px solid var(--color-red);
+  box-shadow: 0 0 5px var(--color-red-50);
+}
+
+.Input-validationMessage {
+  color: var(--color-red);
+}
+
+.Input-label + .Input-shape {
+  margin-top: 5px;
+}
+
+.Input-shape + .Input-validationMessage {
+  margin-top: 5px;
+}
+
+.Input + .Input {
+  margin-top: 10px;
+}

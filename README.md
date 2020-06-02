@@ -1,2 +1,3 @@
-# api-konsolka
-API Könsolkå
+# API Könsolkå
+
+This is browser extension that provide GUI for Sendsay API.

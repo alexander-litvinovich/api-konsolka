@@ -1,0 +1,12 @@
+.Tag {
+  padding: 4px;
+  color: var(--color-red);
+  font-size: 12px;
+  line-height: 1em;
+  background-color: var(--color-red-20);
+  border-radius: 3px;
+}
+
+.Tag + .Tag {
+  margin-left: 10px;
+}
