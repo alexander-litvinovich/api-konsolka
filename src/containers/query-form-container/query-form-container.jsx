@@ -171,6 +171,7 @@ class QueryFormContainer extends React.Component {
   };
 
   onPopupResizeStop = () => {
+    // return console.log("On poup resize stop:", this.resizeMeasurment.appWindow.current);
     const {
       width: popupWidth,
       height: popupHeight,

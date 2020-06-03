@@ -1,7 +1,10 @@
 import React from "react";
+import classNames from "classnames";
+
+import "./handle-resizer.css";
 
 const HandleResizer = () => (
-  <div className="QueryForm-HandleResizer">
+  <div className="HandleResizer">
     <svg
       width="20"
       height="20"
@@ -19,4 +22,4 @@ const HandleResizer = () => (
   </div>
 );
 
-export { HandleResizer };
+export default HandleResizer;

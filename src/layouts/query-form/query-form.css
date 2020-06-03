@@ -2,15 +2,6 @@
   box-sizing: border-box;
 }
 
-/* .QueryForm > .QueryForm-resizable {
-  box-shadow: 0 5px 20px var(--color-border);
-}
-
-.QueryForm {
-  margin-top: 50px;
-  margin-left: 50px;
-} */
-
 .QueryForm {
   display: flex;
   flex-direction: column;
@@ -19,20 +10,15 @@
   background: var(--color-underpaper);
 }
 
-.QueryForm-resizable {
-  /* border: 1px solid #000; */
+.QueryForm-page{
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-paperwhite);
-}
-
-.QueryForm-userPanel {
+  background-color: var(--color-paperwhite);
 }
 
 .QueryForm-editor {
-  /* border: 1px solid #000; */
   display: flex;
   flex-direction: row;
   flex-grow: 1;
@@ -164,22 +150,7 @@
   height: 30px !important;
 }
 
-.QueryForm-HandleResizer {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  align-items: center;
-  justify-content: space-around;
-  height: 100%;
-  color: var(--color-border);
-}
-
-.QueryForm-HandleResizer:hover,
-.QueryForm-HandleResizer:active {
-  color: var(--color-border-hover);
-}
-
-.QueryForm.is-popup .QueryForm-actions {
+.QueryForm.isPopupMode .QueryForm-actions {
   padding-left: 40px;
 }
 

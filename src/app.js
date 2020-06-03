@@ -4,4 +4,7 @@ import PopupContainer from "./containers/popup-container";
 
 import "./global.css";
 
-ReactDOM.render(<PopupContainer />, document.getElementById("root"));
+ReactDOM.render(
+  <PopupContainer popupMode={true} />,
+  document.getElementById("root")
+);

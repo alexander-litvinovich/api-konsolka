@@ -32,14 +32,17 @@ class CodeFlaskConnector extends Component {
     }
   }
 
-  componentWillReceiveProps(newProps) {
+  shouldComponentUpdate(newProps) {
     if (!this.codeFlask) {
-      return;
+      return false;
     }
 
     if (newProps.code !== this.codeFlask.getCode()) {
       this.codeFlask.updateCode(newProps.code);
+      return true;
     }
+
+    return false;
   }
 
   render() {

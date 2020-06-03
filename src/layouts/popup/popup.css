@@ -1,0 +1,8 @@
+.Popup {
+  /* border: 1px solid #000; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-paperwhite);
+}

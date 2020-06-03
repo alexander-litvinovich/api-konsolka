@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import classNames from "classnames";
 import { Resizable } from "re-resizable";
 import CodeFlaskConnector from "modules/codeflask-connector";
@@ -11,12 +11,22 @@ import Icon from "components/icon";
 import Tag from "components/tag";
 import Preloader from "components/preloader/preloader";
 
-import { HandleResizer, HandleBar } from "./components";
+import Popup from "layouts/popup";
+
+import { HandleBar } from "./components";
 
 import "./query-form.css";
 import "./codeflask-theme.css";
 
+const QueryFormWrapper = ({ popupMode = false, ...restProps }) =>
+  popupMode ? (
+    <Popup {...restProps} />
+  ) : (
+    <div className="QueryForm-page" {...restProps} />
+  );
+
 const QueryForm = ({
+  popupMode,
   isMac,
 
   info,
@@ -43,31 +53,16 @@ const QueryForm = ({
   onSwitchUser,
 }) => {
   return (
-    <div className="QueryForm is-popup">
-      <Resizable
-        className="QueryForm-resizable"
-        size={{
-          width: popupWidth,
-          height: popupHeight,
-        }}
-        minWidth="450"
-        maxWidth="800"
-        minHeight="350"
-        enable={{
-          bottomLeft: true,
-        }}
-        handleComponent={{
-          bottomLeft: <HandleResizer />,
-        }}
-        handleStyles={{
-          bottomLeft: {
-            left: 0,
-            bottom: 0,
-            width: "30px",
-            height: "30px",
-          },
-        }}
-        ref={resizeMeasurment.appWindow}
+    <div
+      className={classNames("QueryForm", {
+        isPopupMode: popupMode,
+      })}
+    >
+      <QueryFormWrapper
+        popupMode={popupMode}
+        popupWidth={popupWidth}
+        popupHeight={popupHeight}
+        popupRef={resizeMeasurment.appWindow}
         onResizeStop={onPopupResizeStop}
       >
         <div className="QueryForm-info">
@@ -208,7 +203,7 @@ const QueryForm = ({
             </A>
           </div>
         </div>
-      </Resizable>
+      </QueryFormWrapper>
     </div>
   );
 };
