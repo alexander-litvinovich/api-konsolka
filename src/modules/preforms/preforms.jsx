@@ -20,6 +20,8 @@ const loginWithPassForm = {
     },
     password: {
       value: "test",
+      isReuired: true,
+      isTouched: false,
       validator: (value) => +value === 123,
     },
   },
@@ -49,6 +51,7 @@ const withPreform = (...formConfigs) => (WrappedComponent) => {
 
     isSingle = false;
     refs = {};
+    isRequired = {};
     validators = {};
 
     formRefs = {};
@@ -75,15 +78,21 @@ const withPreform = (...formConfigs) => (WrappedComponent) => {
         this.formFields[formName] = Object.keys(fields);
 
         this.formFields[formName].forEach((fieldName) => {
+          const {
+            value = "",
+            validator = () => true,
+            isRequired = false,
+            isTouched = false,
+          } = fields[fieldName];
+
           this.refs[_addr(formName, fieldName)] = React.createRef();
-          this.validators[_addr(formName, fieldName)] =
-            fields[fieldName].validator || ((value) => !!value || true);
+          this.validators[_addr(formName, fieldName)] = validator;
+          this.isRequired[_addr(formName, fieldName)] = isRequired;
 
           this.state[_addr(formName, fieldName)] = {
-            value: fields[fieldName].value || "",
-            isValid: this.validators[_addr(formName, fieldName)](
-              fields[fieldName].value
-            ),
+            value,
+            isValid: this.validators[_addr(formName, fieldName)](value),
+            isTouched,
           };
         });
       });
@@ -96,11 +105,16 @@ const withPreform = (...formConfigs) => (WrappedComponent) => {
     };
 
     setValue = (formName, fieldName, value, callback = null) => {
+      const fieldAddr = _addr(formName, fieldName);
+
       this.setState(
         {
-          [_addr(formName, fieldName)]: {
+          [fieldAddr]: {
             value,
-            isValid: this.validators[_addr(formName, fieldName)](value),
+            isValid:
+              this.validators[fieldAddr](value) &&
+              (this.isRequired[fieldAddr] ? !!value : true),
+            isTouched: true,
           },
         },
         callback
@@ -109,10 +123,14 @@ const withPreform = (...formConfigs) => (WrappedComponent) => {
 
     updateField = (formName, fieldName, value) => {
       this.setValue(formName, fieldName, value);
-      this.refs[_addr(formName, fieldName)].current.value = value;
+      try {
+        this.refs[_addr(formName, fieldName)].current.value = value;
+      } catch (error) {
+        console.error("Preform", error);
+      }
     };
 
-    connectField = (formName, fieldName, event = "onChange") => {
+    connectField = (formName, fieldName, event = "onInput") => {
       if (!this.state[_addr(formName, fieldName)]) {
         console.error(
           `Problem with connectField("${formName}", "${fieldName}"). Check form name and field name.`
@@ -180,6 +198,9 @@ const withPreform = (...formConfigs) => (WrappedComponent) => {
     isFieldValid = (formName, fieldName) =>
       this.state[_addr(formName, fieldName)].isValid;
 
+    isFieldTouched = (formName, fieldName) =>
+      this.state[_addr(formName, fieldName)].isTouched;
+
     render = () => {
       return (
         <WrappedComponent
@@ -190,6 +211,7 @@ const withPreform = (...formConfigs) => (WrappedComponent) => {
             updateField: this.updateField,
             connectField: this.connectField,
             isFieldValid: this.isFieldValid,
+            isFieldTouched: this.isFieldTouched,
             connectForm: this.connectForm,
             submitForm: this.submitForm,
             getFormValues: this.getFormValues,

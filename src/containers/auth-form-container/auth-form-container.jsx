@@ -10,16 +10,15 @@ const loginWithPassForm = {
   _fields: {
     login: {
       value: "",
-      // value: "codeception",
       validator: (value) => value.length > 0,
+      isRequired: true,
     },
     sublogin: {
       value: "",
     },
     password: {
-      value: "",
-      // value: "eepe5See",
       validator: (value) => value.length > 0,
+      isRequired: true,
     },
   },
 };
@@ -28,7 +27,6 @@ const authApiKeyForm = {
   _formName: "authApiKeyForm",
   _fields: {
     apiKey: {
-      value: "",
       // value: "19mb7LxOpdrHCNVIZbpgm96sdu-8m607CkkVPy3OlCMuJ0t_4n7KM4dLSDavjopT2mBkD8w",
       validator: (value) => value.length > 0,
     },
@@ -42,32 +40,40 @@ class AuthFormContainer extends React.Component {
   };
 
   loginWithPassFormHandler = (e, values) => {
-    this.setState({ loginLoading: true }, () => {
-      console.log("my props", this.props);
+    this.setState(
+      { loginLoading: true, cantLoginWithPassFormHandler: false },
+      async () => {
+        const { connection, app } = this.props;
 
-      const { connection, app } = this.props;
-      console.log(connection);
-      console.log("loginWithPassFormHandler", values);
+        console.log("loginWithPassFormHandler", values, connection);
 
-      console.log("values:", values);
+        connection.auth(AUTH, values);
 
-      connection.auth(AUTH, values);
-      connection.check().then((res) => {
-        console.log("Connection status:", res);
-        app.showLoggedIn();
-      });
-    });
+        if (await connection.check()) {
+          app.showLoggedIn();
+        } else {
+          console.log("err", connection.getLastErrorResponse());
+          
+          this.setState({
+            loginLoading: false,
+            cantLoginWithPassFormHandler: true,
+          });
+        }
+      }
+    );
   };
 
   authApiKeyFormHandler = (e, values) => {
-    this.setState({ loginLoading: true }, () => {
+    this.setState({ loginLoading: true, cantAuthApiKeyFormHandler: false }, async () => {
       const { connection, app } = this.props;
 
       connection.auth(APIKEY, values);
-      connection.check().then((res) => {
-        console.log("Connection status:", res);
+
+      if (await connection.check()) {
         app.showLoggedIn();
-      });
+      } else {
+        this.setState({ cantAuthApiKeyFormHandler: true, loginLoading: false });
+      }
     });
   };
 
@@ -108,10 +114,6 @@ class AuthFormContainer extends React.Component {
     );
   };
 
-  signIn = () => {
-    console.log("Sign in with", this.state);
-  };
-
   onHijackSession = () => {
     const { app } = this.props;
     app.showHijackSession();
@@ -127,9 +129,8 @@ class AuthFormContainer extends React.Component {
         {...this.state}
         preform={preform}
         setServicePass={this.setServicePass}
-        onChangeLoginType={this.onChangeLoginType}
-        signIn={this.signIn}
         canHijackSession={canHijackSession}
+        onChangeLoginType={this.onChangeLoginType}
         onHijackSession={this.onHijackSession}
       />
     );

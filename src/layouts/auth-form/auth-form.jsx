@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import classNames from "classnames";
+
+import { ConsoleContext } from "containers/console-context";
 
 import A from "components/a";
 import Button from "components/button";
@@ -11,7 +13,12 @@ import Radio from "components/radio";
 import Logo from "./components/logo/logo";
 import "./auth-form.css";
 
-const AuthLoginPassword = ({ preform, setServicePass, loginLoading }) => {
+const AuthLoginPassword = ({
+  preform,
+  setServicePass,
+  loginLoading,
+  cantLoginWithPassFormHandler = false,
+}) => {
   return (
     <div className="AuthForm-loginPassword">
       <form {...preform.connectForm("loginWithPassForm")}>
@@ -24,8 +31,11 @@ const AuthLoginPassword = ({ preform, setServicePass, loginLoading }) => {
             </Label>
           }
           {...preform.connectField("loginWithPassForm", "login")}
-          isValid={preform.isFieldValid("loginWithPassForm", "login")}
-          validationMessage="Как-то пустовато..."
+          isValid={
+            preform.isFieldValid("loginWithPassForm", "login") ||
+            !preform.isFieldTouched("loginWithPassForm", "login")
+          }
+          validationMessage="Логин не может быть пустым"
         />
 
         <Input
@@ -49,27 +59,40 @@ const AuthLoginPassword = ({ preform, setServicePass, loginLoading }) => {
           }
           panelRight={<A onClick={setServicePass}>🔪</A>}
           {...preform.connectField("loginWithPassForm", "password")}
-          isValid={preform.isFieldValid("loginWithPassForm", "password")}
-          validationMessage="Как-то пустовато..."
+          isValid={
+            preform.isFieldValid("loginWithPassForm", "password") ||
+            !preform.isFieldTouched("loginWithPassForm", "password")
+          }
+          validationMessage="Пароль не может быть пустым"
         />
-        {/* {isValid("loginWithPassForm", "password") ? "TRUE" : "FALSE"} */}
 
         <Button mt="4" intent="primary" loading={loginLoading} type="submit">
           Войти
         </Button>
+
+        {cantLoginWithPassFormHandler && <div>Вход не вышел</div>}
       </form>
     </div>
   );
 };
 
-const AuthApiKey = ({ preform, loginLoading }) => {
+const AuthApiKey = ({
+  preform,
+  loginLoading,
+  cantAuthApiKeyFormHandler = false,
+}) => {
   return (
     <div className="AuthForm-apiKey">
       <form {...preform.connectForm("authApiKeyForm")}>
         <Input
           text
-          placeholder="АПИ ключик"
+          placeholder="API-ключик"
           {...preform.connectField("authApiKeyForm", "apiKey")}
+          isValid={
+            preform.isFieldValid("authApiKeyForm", "apiKey") ||
+            !preform.isFieldTouched("authApiKeyForm", "apiKey")
+          }
+          validationMessage="А API-ключик на гвоздике висит?"
           rows="4"
           label={
             <Label size="s" color="secondary">
@@ -80,19 +103,24 @@ const AuthApiKey = ({ preform, loginLoading }) => {
         <Button mt="4" intent="primary" loading={loginLoading} type="submit">
           Войти
         </Button>
+
+        {cantAuthApiKeyFormHandler && <div>Вход не вышел</div>}
       </form>
     </div>
   );
 };
 
 const AuthForm = ({
-  popupMode = false,
   onHijackSession,
   canHijackSession,
   onChangeLoginType,
   loginWithPass = true,
   ...restProps
 }) => {
+  const {
+    store: { popupMode },
+  } = useContext(ConsoleContext);
+
   return (
     <div
       className={classNames("AuthForm", {
