@@ -8,7 +8,7 @@ const stateStorage = {
     );
   },
 
-  load: (name, invalidateTime = 600000) => {
+  load: (name, invalidateTime = 60000000) => {
     return storage.getLocal(`${name}State`).then((savedState) => {
       if (!!savedState) {
         try {

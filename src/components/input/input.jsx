@@ -8,6 +8,7 @@ import "./input.css";
 const Input = ({
   password,
   text,
+  mono,
   label = null,
   panelLeft = null,
   panelRight = null,
@@ -19,6 +20,7 @@ const Input = ({
     className={classNames("Input", cssUtils(restProps), {
       isInput: !text,
       isTextarea: text,
+      isMono: mono,
       isValidationMessage: validationMessage && !isValid,
     })}
   >

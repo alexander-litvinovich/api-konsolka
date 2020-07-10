@@ -21,7 +21,28 @@ const defaultTemplates = [
         }`,
   },
   {
-    name: "Статунька",
+    name: "Cколько писем выпуска доставляются",
+    text: `{
+      "action": "stat.uni",
+      "select": [
+          "count(deliv.member.id)"
+      ],
+      "filter": [
+          {
+              "a": "issue.id",
+              "op": "==",
+              "v": "@"
+          },
+          {
+              "a": "deliv.status",
+              "op": "==",
+              "v": "0"
+          }
+      ]
+  }`,
+  },
+  {
+    name: "Статистика по выпуску",
     text: `{
       "action": "stat.uni",
       "select": [

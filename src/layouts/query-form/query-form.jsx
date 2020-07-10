@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { useContext } from "react";
 import classNames from "classnames";
 import { Resizable } from "re-resizable";
 import CodeFlaskConnector from "modules/codeflask-connector";
@@ -15,6 +15,8 @@ import Popup from "layouts/popup";
 
 import { HandleBar } from "./components";
 
+import { ConsoleContext } from "containers/console-context";
+
 import "./query-form.css";
 import "./codeflask-theme.css";
 
@@ -26,9 +28,6 @@ const QueryFormWrapper = ({ popupMode = false, ...restProps }) =>
   );
 
 const QueryForm = ({
-  popupMode,
-  isMac,
-
   info,
   infoLoading,
   loading,
@@ -52,6 +51,10 @@ const QueryForm = ({
   onSendRequest,
   onSwitchUser,
 }) => {
+  const {
+    store: { isMac, popupMode },
+  } = useContext(ConsoleContext);
+
   return (
     <div
       className={classNames("QueryForm", {

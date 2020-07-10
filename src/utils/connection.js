@@ -18,13 +18,14 @@ const QUERY_INFO = {
   ],
 };
 
-const SESSION = 1,
-  AUTH = 2,
-  APIKEY = 3;
+const [SESSION, AUTH, APIKEY] = [1, 2, 3];
+// AUTH = 2,
+// APIKEY = 3;
 
 class Connection {
   authType = 0;
   secretStack = [];
+  _lastErrorResponse = null;
 
   auth(type, credentials = {}) {
     const { login, sublogin, password, apiKey, session } = credentials;
@@ -143,14 +144,23 @@ class Connection {
     });
   }
 
+  getLastErrorResponse() {
+    return this._lastErrorResponse;
+  }
+
   check() {
     return this._sendsay
       .request(QUERY_CHECK_AUTH)
       .then((res) => {
-        if (!!res.account) return true;
+        if (!!res.account) {
+          this._lastErrorResponse = null;
+          return true;
+        }
+        this._lastErrorResponse = res;
         return false;
       })
       .catch((err) => {
+        this._lastErrorResponse = err;
         return false;
       });
   }

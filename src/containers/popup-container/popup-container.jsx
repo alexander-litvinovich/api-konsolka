@@ -5,16 +5,36 @@ import { withToast } from "modules/toast";
 import QueryFormContainer from "containers/query-form-container";
 import SessionHijackContainer from "containers/session-hijack-container";
 import AuthFormContainer from "containers/auth-form-container";
+import TableViewContainer from "containers/table-view-container";
+
+import { ConsoleContext } from "containers/console-context";
 
 import { connection, SESSION, AUTH, APIKEY, stateStorage } from "utils";
 
-const LOGGED_IN = 1,
+const LOADING = 0,
+  LOGGED_IN = 1,
   AUTH_FORM = 2,
-  HIJACK_SESSION = 3;
+  HIJACK_SESSION = 3,
+  TABLE_VIEW = 4;
 
 class PopupContainer extends React.Component {
+  static contextType = ConsoleContext;
+
   state = {
-    appMode: AUTH_FORM,
+    appMode: LOADING,
+  };
+
+  showTableView = () => {
+    this.setState(
+      {
+        appMode: TABLE_VIEW,
+      },
+      () => {
+        console.log("App showTableView", this.state);
+
+        stateStorage.save("app", this.state);
+      }
+    );
   };
 
   showLoggedIn = () => {
@@ -46,6 +66,15 @@ class PopupContainer extends React.Component {
 
   componentDidMount = async () => {
     const { secret, ...restState } = await stateStorage.load("app");
+    const isShowTable = /\?table/i;
+    console.log(
+      "Query string",
+      window.location.href,
+      isShowTable.test(window.location.href)
+    );
+
+    if (isShowTable.test(window.location.href))
+      return this.showTableView();
 
     console.log("savedState", secret, restState);
 
@@ -66,6 +95,12 @@ class PopupContainer extends React.Component {
     };
 
     switch (appMode) {
+      case LOADING:
+        return (
+          <div>
+            <h1>LOADING</h1>
+          </div>
+        );
       case LOGGED_IN:
         return <QueryFormContainer connection={connection} app={app} />;
 
@@ -80,7 +115,10 @@ class PopupContainer extends React.Component {
             canHijackSession={canHijackSession}
           />
         );
-
+      case TABLE_VIEW:
+        return (
+          <TableViewContainer />
+        )
       default:
         break;
     }

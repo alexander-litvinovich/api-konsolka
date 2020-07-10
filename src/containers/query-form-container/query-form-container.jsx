@@ -2,7 +2,9 @@ import React from "react";
 import { GlobalHotKeys } from "react-hotkeys";
 import { toast } from "react-toastify";
 
-import { downloadFile, copyText, isMac, stateStorage } from "utils";
+import { downloadFile, copyText, stateStorage } from "utils";
+
+import { ConsoleContext } from "containers/console-context";
 
 import QueryForm from "layouts/query-form";
 import analyseQueryAndResponse from "./support/analyse";
@@ -10,6 +12,8 @@ import templates from "./support/templates";
 import { formatJSON, validateJSON, toJSON } from "./support/json";
 
 class QueryFormContainer extends React.Component {
+  static contextType = ConsoleContext;
+
   resizeMeasurment = {
     panel: React.createRef(),
     appWindow: React.createRef(),
@@ -78,6 +82,8 @@ class QueryFormContainer extends React.Component {
           responseAnalytics: analyseQueryAndResponse(query, response),
           loading: false,
         });
+
+        this.context.setStore({response, query})
       });
     });
   };
@@ -184,9 +190,9 @@ class QueryFormContainer extends React.Component {
   };
 
   keyMap = {
-    SEND_REQUEST: isMac() ? "cmd+enter" : "ctrl+enter",
-    FORMAT_REQUEST: isMac() ? "cmd+shift+f" : "ctrl+shift+f",
-    SAVE_QUERY_RESPONSE: isMac() ? "cmd+s" : "ctrl+s",
+    SEND_REQUEST: this.context.store.isMac ? "cmd+enter" : "ctrl+enter",
+    FORMAT_REQUEST: this.context.store.isMac ? "cmd+shift+f" : "ctrl+shift+f",
+    SAVE_QUERY_RESPONSE: this.context.store.isMac ? "cmd+s" : "ctrl+s",
   };
 
   handlers = {
@@ -206,7 +212,6 @@ class QueryFormContainer extends React.Component {
       <GlobalHotKeys keyMap={this.keyMap} handlers={this.handlers}>
         <QueryForm
           {...state}
-          isMac={isMac()}
           onCopySession={this.onCopySession}
           onDownloadQueryResponse={this.onDownloadQueryResponse}
           onFormatQuery={this.onFormatQuery}

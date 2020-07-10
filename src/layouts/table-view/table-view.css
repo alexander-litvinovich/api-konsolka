@@ -1,0 +1,32 @@
+.TableView {
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+  background-color: var(--color-paperwhite);
+}
+
+.TableView-toolbar {
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+  background-color: var(--color-paperwhite);
+  border-bottom: 1px solid var(--color-border);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+.TableView-table {
+    align-self: start;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+  background-color: var(--color-paperwhite);
+
+}

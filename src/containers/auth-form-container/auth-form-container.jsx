@@ -9,12 +9,10 @@ const loginWithPassForm = {
   _formName: "loginWithPassForm",
   _fields: {
     login: {
-      value: "",
       validator: (value) => value.length > 0,
       isRequired: true,
     },
     sublogin: {
-      value: "",
     },
     password: {
       validator: (value) => value.length > 0,

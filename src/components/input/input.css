@@ -43,3 +43,9 @@
 .Input + .Input {
   margin-top: 10px;
 }
+
+.Input.isMono input,
+.Input.isMono textarea {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    monospace;
+}
