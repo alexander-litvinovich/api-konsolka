@@ -1,7 +1,7 @@
 ![image](https://github.com/alexander-litvinovich/api-konsolka/assets/11630525/bceaf11c-89c5-4c76-90ab-74c855ad43ec)
 
 # Sendsay API Könsolkå
-This is a browser extension that provides a humble GUI for Sendsay API. 💾 The last build from 7 Jun 2021 (discontinued)
+This is a browser extension that provides a humble GUI for Sendsay API. 💾 [The last build from 7 Jun 2021](https://github.com/alexander-litvinovich/api-konsolka/blob/master/build.zip) (discontinued)
 
 ![console-screenshots](https://github.com/alexander-litvinovich/api-konsolka/assets/11630525/3d74686c-f4a8-431f-a36c-ab8c7436315c)
 
@@ -36,7 +36,7 @@ TBD in future:
 ---
 
 ## How to install in Chrome
-1. Unpack the "build.zip" somewhere
+1. Unpack the "[build.zip](https://github.com/alexander-litvinovich/api-konsolka/blob/master/build.zip)" somewhere
 
 2. Open chrome settings page:
 
