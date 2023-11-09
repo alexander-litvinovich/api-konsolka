@@ -1,5 +1,5 @@
 # Sendsay API Könsolkå
-This is a browser extension that provides a humble GUI for Sendsay API. 💾 [The last build from 7 Jun 2021](https://github.com/alexander-litvinovich/api-konsolka/blob/master/build.zip) (discontinued)
+This is a browser extension that provides a humble GUI for Sendsay API. 💾 [The last build from 7 Jun 2020](https://github.com/alexander-litvinovich/api-konsolka/blob/master/build.zip) (discontinued)
 
 ![console-screenshots](https://github.com/alexander-litvinovich/api-konsolka/assets/11630525/4f4ad5a3-0d86-4750-aa52-7cab2e186495)
 
